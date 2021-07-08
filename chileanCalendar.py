@@ -28,6 +28,7 @@ def dtd(f):
     y = f - 1 * bday_cl
     return date(y.year, y.month, y.day)
 
+
 def movedays(f, days=1):
     # negativos busca hacia atras
     cal = CLTradingCalendar()
