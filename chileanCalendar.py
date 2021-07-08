@@ -13,7 +13,7 @@ from dateutil.relativedelta import relativedelta
 
 
 def today():
-    date.today()
+    return date.today()
 
 
 def isHoliday(f):
@@ -28,14 +28,36 @@ def dtd(f):
     y = f - 1 * bday_cl
     return date(y.year, y.month, y.day)
 
+def movedays(f, days=1):
+    # negativos busca hacia atras
+    cal = CLTradingCalendar()
+    bday_cl = CustomBusinessDay(calendar=cal)
+
+    y = f + days * bday_cl
+    return date(y.year, y.month, y.day)
+
 
 def mtd(f, mo=1):
-    # negativos busca hacia adelante
+    # "mo" numero de meses que se mueve hacia atras
+    if mo<=0:
+        raise("mo debe ser distinto de 0 y positivo")
+    # negativos busca hacia atras
     cal = CLTradingCalendar()
     bday_cl = CustomBusinessDay(calendar=cal)
 
     f = date(f.year, f.month, 1) + relativedelta(months=-mo+1)
     y = f - 1 * bday_cl
+    return date(y.year, y.month, y.day)
+
+
+def movemonts(f, mo=1):
+    # negativos busca hacia atras
+    cal = CLTradingCalendar()
+    bday_cl = CustomBusinessDay(calendar=cal)
+
+    f = f + relativedelta(months=mo) - relativedelta(days=1)
+
+    y = f + 1 * bday_cl
     return date(y.year, y.month, y.day)
 
 
@@ -104,6 +126,7 @@ class CLTradingCalendar(AbstractHolidayCalendar):
         Holiday('FeriadoFredes', year=2018, month=11, day=2)
     ]
     
+
 
 
 if __name__ == "__main__":
