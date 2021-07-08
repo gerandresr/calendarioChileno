@@ -51,7 +51,7 @@ def mtd(f, mo=1):
     return date(y.year, y.month, y.day)
 
 
-def movemonts(f, mo=1):
+def movemonths(f, mo=1):
     # negativos busca hacia atras
     cal = CLTradingCalendar()
     bday_cl = CustomBusinessDay(calendar=cal)
