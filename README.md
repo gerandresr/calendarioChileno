@@ -2,9 +2,21 @@
 Calendario con feriados chilenos y algunas formulas con fechas
 
 # liberias necesarias
-import datetime as dt
-from datetime import date
-from pandas.tseries.holiday import AbstractHolidayCalendar, Holiday,\
-                                    sunday_to_monday, GoodFriday
-from pandas.tseries.offsets import CustomBusinessDay
-from dateutil.relativedelta import relativedelta
+    from datetime import date
+    
+    import os
+    FOLDER = 'D:/python/'
+    os.chdir(FOLDER)
+    
+    import chileanCalendar as ccl
+    
+    cal = ccl.CLTradingCalendar()
+    bday_cl = ccl.CustomBusinessDay(calendar=cal)
+    
+    fecha = date.today()
+    
+    isholiday(cal, fecha)
+    
+    for i in [1,2,3,4,5,6,7,8,9]:
+        print(mtd(cal, bday_cl, fecha, mo=i))
+        print(ytd(cal, bday_cl, fecha, yr=i))
